@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<header th:replace="~{CustomerModule/base :: head}"></header>
+
+<body>
+
+<div th:replace="~{CustomerModule/base :: loader}"></div>
+
+<div th:replace="~{CustomerModule/base :: nav}"></div>
+
+<!-- ***** My Booking Page ***** -->
+<div class="shows-events-schedule">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-heading">
+                    <h2>My Bookings</h2>
+                </div>
+            </div>
+            <div class="col-lg-12" th:if="${bookings != null && !bookings.isEmpty()}">
+                <ul>
+                    <li th:each="booking : ${bookings}">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="title">
+                                    <h4 th:text="${booking.event.eventName}"></h4>
+<!--                                    <span>140 Tickets Available</span>-->
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="time"><span><i class="fa fa-clock-o"></i>
+                                    <h6 th:text="${booking.event.eventDate}"></h6><br>
+                                    <h6 th:text="${booking.event.startTime}"></h6> to
+                                    <h6 th:text="${booking.event.endTime}"></h6></span></div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="place"><span><i class="fa fa-map-marker"></i><h6 th:text="${booking.event.eventAddress}"></h6></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="place"><span><i class="fa fa-ticket-alt"></i><h6 th:text="${booking.ticketQuantity}"></h6></span>
+                                </div>
+                            </div>
+<!--                            <div class="col-lg-3">-->
+<!--                                <div class="main-dark-button">-->
+<!--                                    <a href="ticket-details.html">Purchase Tickets</a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="col-lg-12" th:if="${bookings == null || bookings.isEmpty()}">
+                <p>You have not booked any events yet.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{CustomerModule/base :: footerlibs}"></footer>
+
+</body>
+</html>
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title>My Bookings</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>My Booked Events</h1>-->
+
+<!--&lt;!&ndash; Check if there are any booked events &ndash;&gt;-->
+<!--<div th:if="${bookings != null && !bookings.isEmpty()}">-->
+<!--    <h2>List of Events You Have Booked</h2>-->
+<!--    <ul>-->
+<!--        <li th:each="booking : ${bookings}">-->
+<!--            &lt;!&ndash; Display event details &ndash;&gt;-->
+<!--            <div>-->
+<!--                <h3 th:text="${booking.event.eventName}">Event Name</h3>-->
+<!--                <p><strong>Event Date:</strong> <span th:text="${booking.event.eventDate}">Event Date</span></p>-->
+<!--                <p><strong>Quantity:</strong> <span th:text="${booking.ticketQuantity}">Ticket Quantity</span></p>-->
+<!--                <p><strong>Total Price:</strong> $<span th:text="${booking.totalPrice}">Total Price</span></p>-->
+<!--                <p><strong>Status:</strong> <span th:text="${booking.status}">Booking Status</span></p>-->
+<!--            </div>-->
+<!--            <hr/>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; If there are no events &ndash;&gt;-->
+<!--<div th:if="${bookings == null || bookings.isEmpty()}">-->
+<!--    <p>You have not booked any events yet.</p>-->
+<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->

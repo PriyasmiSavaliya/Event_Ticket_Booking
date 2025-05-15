@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Roles</title>
+</head>
+<body>
+
+<h2>Role Management</h2>
+
+<!-- Add Role Form -->
+<form action="/admin/roles/add" method="post">
+    <input type="text" name="roleName" placeholder="Enter Role Name" required>
+    <button type="submit">Add Role</button>
+</form>
+
+<h3>Existing Roles</h3>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="role : ${roles}">
+        <td th:text="${role.id}"></td>
+        <td>
+            <!-- Update Role Form -->
+            <form action="/admin/roles/update" method="post">
+                <input type="hidden" name="roleId" th:value="${role.id}">
+                <input type="text" name="roleName" th:value="${role.name}" required>
+                <button type="submit">Update</button>
+            </form>
+        </td>
+        <td>
+            <!-- Delete Role Button (API Call) -->
+            <button type="button" th:onclick="'deleteRole(' + ${role.id} + ')'">Delete</button>
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+<script>
+    function deleteRole(roleId) {
+        // Confirm if user really wants to delete
+        if (confirm("Are you sure you want to delete this role?")) {
+            // Make a DELETE request
+            fetch(`/admin/roles/delete`, {
+                method: "POST",  // POST method is being used here instead of DELETE because Thymeleaf is using a POST request
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",  // Ensure the request is URL encoded
+                },
+                body: new URLSearchParams({'roleId': roleId})  // Sending roleId in body for request
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Role deleted successfully!");
+                        location.reload(); // Reload the page to see the changes
+                    } else {
+                        return response.text().then(text => {
+                            throw new Error(text);
+                        });
+                    }
+                })
+                .catch(error => {
+                    alert("Error deleting role: " + error.message);
+                });
+        }
+    }
+</script>
+</body>
+</html>

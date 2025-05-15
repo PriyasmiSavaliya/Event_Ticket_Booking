@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<header th:replace="~{CustomerModule/base :: head}"></header>
+
+<body>
+
+<div th:replace="~{CustomerModule/base :: loader}"></div>
+
+<div th:replace="~{CustomerModule/base :: nav}"></div>
+
+<!-- ***** About Us Page ***** -->
+<div class="page-heading-shows-events">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Tickets On Sale Now!</h2>
+                <span>Check out upcoming and past shows & events and grab your ticket right now.</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="tickets-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="search-box">
+                    <form id="subscribe" action="" method="get">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="search-heading">
+                                    <h4>Sort The Upcoming Shows & Events By:</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <select value="month">
+                                            <option value="month">Month</option>
+                                            <option name="June" id="June">June</option>
+                                            <option name="July" id="July">July</option>
+                                            <option name="August" id="August">August</option>
+                                            <option name="September" id="September">September</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <select value="location">
+                                            <option value="location">Location</option>
+                                            <option name="Brazil" id="Brazil">Brazil</option>
+                                            <option name="Europe" id="Europe">Europe</option>
+                                            <option name="US" id="US">US</option>
+                                            <option name="Asia" id="Asia">Asia</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <select value="month">
+                                            <option value="month">Price</option>
+                                            <option name="min" id="min">$0 - $50</option>
+                                            <option name="standard" id="standard">$50 - $100</option>
+                                            <option name="hight" id="hight">$100 - $200</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <fieldset>
+                                            <button type="submit" id="form-submit" class="main-dark-button">Submit</button>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="heading">
+                    <h2>Tickets Page</h2>
+                </div>
+            </div>
+
+            <div class="col-lg-4" th:each="event : ${events}">
+                <div class="ticket-item">
+                    <div class="thumb">
+                        <img th:if="${event.eventImage}" th:src="@{'/uploads/' + ${event.eventImage}}" alt="Event Image">
+<!--                        <div class="price">-->
+<!--                            <span>1 ticket from <em th:text="${event.eventPrice}"></em></span>-->
+<!--                        </div>-->
+                    </div>
+                    <div class="down-content">
+                        <span th:text="${event.eventDescription}"></span>
+                        <h4 th:text="${event.eventName}"></h4>
+                        <ul>
+                            <li><i class="fa fa-rupee"></i><span th:text="${event.eventPrice}"></span></li>
+                            <li><i class="fa fa-calendar"></i> <span th:text="${event.eventDate}"></span></li>
+                            <li><i class="fa fa-clock-o"></i> <span th:text="${event.startTime}"></span>-<span th:text="${event.endTime}"></span></li>
+                            <li><i class="fa fa-map-marker"></i> <p th:text="${event.eventAddress}"></p></li>
+                        </ul>
+                        <div class="main-dark-button">
+                            <a th:href="@{/customer/book-event/{id}(id=${event.id})}">Purchase Tickets</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="pagination">
+                    <ul>
+                        <li><a href="#">Prev</a></li>
+                        <li><a href="#">1</a></li>
+                        <li class="active"><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">Next</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{CustomerModule/base :: footerlibs}"></footer>
+
+</body>
+</html>
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title>Browse Events</title>-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container mt-5">-->
+<!--    <h1 class="text-center mb-4">Browse Events</h1>-->
+<!--    <div class="row">-->
+<!--        &lt;!&ndash; Loop through events and display them in Bootstrap cards &ndash;&gt;-->
+<!--        <div class="col-md-4" th:each="event : ${events}">-->
+<!--            <div class="card mb-4">-->
+<!--                &lt;!&ndash; Event Image &ndash;&gt;-->
+<!--                <img th:if="${event.eventImage}" th:src="@{'/uploads/' + ${event.eventImage}}" alt="Event Image" width="100"><br>-->
+
+<!--                <div class="card-body">-->
+<!--                    &lt;!&ndash; Event Name &ndash;&gt;-->
+<!--                    <h5 class="card-title" th:text="${event.eventName}"></h5>-->
+<!--                    &lt;!&ndash; Event Description &ndash;&gt;-->
+<!--                    <p class="card-text" th:text="${event.eventDescription}"></p>-->
+<!--                    &lt;!&ndash; Event Address and Date &ndash;&gt;-->
+<!--                    <p class="card-text">-->
+<!--                        <strong>Address: </strong><span th:text="${event.eventAddress}"></span><br>-->
+<!--                        <strong>Date: </strong><span th:text="${event.eventDate}"></span><br>-->
+<!--                        <strong>Time: </strong><span th:text="${event.startTime}"></span> - <span th:text="${event.endTime}"></span>-->
+<!--                    </p>-->
+<!--                    &lt;!&ndash; Event Booking Button &ndash;&gt;-->
+<!--                    <a th:href="@{/customer/book-event/{id}(id=${event.id})}" class="btn btn-primary">Book Now</a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Bootstrap JS &ndash;&gt;-->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>-->
+<!--</body>-->
+<!--</html>-->

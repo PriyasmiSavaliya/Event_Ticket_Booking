@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<header th:replace="~{EventOrganizerModule/base :: header}"></header>
+<body>
+
+<div th:replace="~{EventOrganizerModule/base :: loader}"></div>
+
+<div class="main-wrapper">
+
+    <div th:replace="~{EventOrganizerModule/base :: navside}"></div>
+
+    <div class="page-wrapper cardhead">
+        <div class="content container-fluid">
+
+            <div class="page-header">
+                <div class="row">
+                    <div class="col">
+                        <h3 class="page-title">Add Event</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <form th:action="@{/eventorg/event/add}" th:object="${event}" method="post"
+                                  enctype="multipart/form-data">
+                                <input type="hidden" name="eventOrganizerId" th:value="${eventOrganizerId}"/>
+                                <div class="row">
+                                    <div class="col-xl-6">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label">Event Name</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" th:field="*{eventName}" required
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label">Event Date</label>
+                                            <div class="col-lg-9">
+                                                <input type="date" th:field="*{eventDate}" required
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label">Start Time</label>
+                                            <div class="col-lg-9">
+                                                <input type="time" th:field="*{startTime}" required
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label">End Time</label>
+                                            <div class="col-lg-9">
+                                                <input type="time" th:field="*{endTime}" required class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label">Event Description</label>
+                                            <div class="col-lg-9">
+                                                <textarea rows="1" cols="5" th:field="*{eventDescription}" required
+                                                          class="form-control"
+                                                          placeholder="Enter Description"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label">Event Address</label>
+                                            <div class="col-lg-9">
+                                                <textarea rows="1" cols="5" th:field="*{eventAddress}" required
+                                                          class="form-control"
+                                                          placeholder="Enter Address"></textarea>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-xl-6">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label">Ticket Price</label>
+                                            <div class="col-lg-9">
+                                                <input type="number" th:field="*{eventPrice}" required
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label">Total Tickets</label>
+                                            <div class="col-lg-9">
+                                                <input type="number" th:field="*{totalTicket}" required
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="card-body">
+                                            <div class="custom-file-container" data-upload-id="myFirstImage">
+                                                <label>Upload Event Image <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
+                                                <label class="custom-file-container__custom-file">
+                                                    <input type="file" name="image" required class="custom-file-container__custom-file__custom-file-input" accept="image/*">
+                                                    <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+                                                    <span class="custom-file-container__custom-file__custom-file-control"></span>
+                                                </label>
+                                                <div class="custom-file-container__image-preview"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary">Add Event</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<footer th:replace="~{EventOrganizerModule/base :: libs}"></footer>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<header th:replace="~{AdminModule/base :: header}"></header>
+<body>
+
+<div th:replace="~{AdminModule/base :: loader}"></div>
+
+<div class="main-wrapper">
+
+    <div th:replace="~{AdminModule/base :: navside}"></div>
+
+    <div class="page-wrapper">
+        <div class="content">
+            <div class="page-header">
+                <div class="page-title">
+                    <h4>Event Organisers List</h4>
+                    <h6>View Event Organisers</h6>
+                </div>
+                <!--                <div class="page-btn">-->
+                <!--                    <a href="newstate.html" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img" class="me-2">Add State</a>-->
+                <!--                </div>-->
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-top">
+                        <div class="search-set">
+                            <div class="search-input">
+                                <a class="btn btn-searchset">
+                                    <img th:src="@{/assets/admin/img/icons/search-white.svg}" alt="img">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="wordset">
+                            <ul>
+                                <li>
+                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
+                                            th:src="@{/assets/admin/img/icons/pdf.svg}" alt="img"></a>
+                                </li>
+                                <li>
+                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img
+                                            th:src="@{/assets/admin/img/icons/excel.svg}" alt="img"></a>
+                                </li>
+                                <li>
+                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img
+                                            th:src="@{/assets/admin/img/icons/printer.svg}" alt="img"></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table datanew">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Event Organisers Name</th>
+                                <th>Mobile Number</th>
+                                <th>Email Id</th>
+                                <!--                                <th>Actions</th>-->
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="organization : ${organizations}">
+                                <td th:text="${organization.id}"></td>
+                                <td th:text="${organization.name}"></td>
+                                <td th:text="${organization.mobile}"></td>
+                                <td th:text="${organization.email}"></td>
+                                <!--                                <td th:text="${customer.role.name}"></td>-->
+                                <!--                                <td>-->
+                                <!--                                    <a class="me-3" th:href="@{/admin/manage-organizations/{id}(id=${organization.id})}">-->
+                                <!--                                        <img th:src="@{/assets/admin/img/icons/edit.svg}" alt="img">-->
+                                <!--                                    </a>-->
+                                <!--                                    <a class="me-3 confirm-text" @{/admin/manage-organizations/delete/{id}(id=${organization.id})}">-->
+                                <!--                                        <img th:src="@{/assets/admin/img/icons/delete.svg}" alt="img">-->
+                                <!--                                    </a>-->
+                                <!--                                </td>-->
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="~{AdminModule/base :: libs}"></footer>
+</body>
+</html>

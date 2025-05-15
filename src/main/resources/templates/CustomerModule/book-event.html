@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<header th:replace="~{CustomerModule/base :: head}"></header>
+
+<body>
+
+<div th:replace="~{CustomerModule/base :: loader}"></div>
+
+<div th:replace="~{CustomerModule/base :: nav}"></div>
+
+<!-- ***** About Us Page ***** -->
+<div class="page-heading-shows-events">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Tickets On Sale Now!</h2>
+                <span>Check out upcoming and past shows & events and grab your ticket right now.</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ticket-details-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="left-image">
+                    <img th:if="${event.eventImage}" th:src="@{'/uploads/' + ${event.eventImage}}" alt="Event Image">
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <form th:action="@{/customer/book-event/{id}(id=${event.id})}" method="post">
+                    <div class="right-content">
+                        <h4 th:text="${event.eventName}"></h4>
+                        <!--                    <span>240 Tickets still available</span>-->
+                        <br/>
+                        <ul>
+                            <li><i class="fa fa-clock-o"></i> Thursday 18:00 to 22:00</li>
+                            <li><i class="fa fa-map-marker"></i>Copacabana Beach, Rio de Janeiro</li>
+                        </ul>
+                        <div class="quantity-content">
+                            <div class="left-content">
+                                <div>Ticket Price : <b>₹</b><h6 th:text="${event.eventPrice}"></h6></div>
+<!--                                                                <p>$65 per ticket</p>-->
+                            </div>
+                            <div class="right-content">
+                                <div class="quantity buttons_added">
+                                    <input type="button" value="-" class="minus">
+                                    <input type="number" step="1" min="1"
+                                           max="10" name="quantity" value="1"
+                                           title="Qty"
+                                           class="input-text qty text"
+                                           size="4" pattern=""
+                                           inputmode="">
+                                    <input type="button" value="+" class="plus">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="total">
+                            <h4 id="totalprice"></h4>
+                            <div class="main-dark-button"><input type="submit" value="Purchase Tickets"></div>
+                        </div>
+                        <div class="warn">
+                            <p>*You Can Only Buy 10 Tickets For This Show</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{CustomerModule/base :: footerlibs}"></footer>
+
+<script>
+    $(document).ready(function () {
+        // Get the event price from the <h6> tag and ensure it's a valid number
+        let pricePerItem = parseFloat($(".left-content h6").text().trim()) || 0;
+
+        function updateTotal() {
+            let quantity = parseInt($('input[name="quantity"]').val()) || 1;
+            let totalPrice = pricePerItem * quantity;
+            $("#totalprice").text("Total: ₹" + totalPrice.toFixed(2));
+        }
+
+        // On clicking plus or minus button
+        $(".plus, .minus").click(function () {
+            let inputField = $('input[name="quantity"]');
+            let currentValue = parseInt(inputField.val()) || 1;
+
+            if ($(this).hasClass("plus")) {
+                if (currentValue < 10) {
+                    inputField.val(currentValue + 1);
+                }
+            } else if ($(this).hasClass("minus") && currentValue > 1) {
+                inputField.val(currentValue - 1);
+            }
+
+            inputField.trigger("input"); // Trigger input event to update total
+        });
+
+        // On manually changing the input
+        $('input[name="quantity"]').on("input", function () {
+            let inputVal = parseInt($(this).val());
+            if (isNaN(inputVal) || inputVal < 1) {
+                $(this).val(1); // Ensure minimum value is 1
+            } else if (inputVal > 10) {
+                $(this).val(10); // Ensure maximum value is 10
+            }
+            updateTotal();
+        });
+
+        // Initial calculation on page load
+        updateTotal();
+    });
+
+</script>
+</body>
+</html>
+
+

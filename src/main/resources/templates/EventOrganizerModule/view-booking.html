@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<header th:replace="~{EventOrganizerModule/base :: header}"></header>
+<body>
+
+<div th:replace="~{EventOrganizerModule/base :: loader}"></div>
+
+<div class="main-wrapper">
+
+    <div th:replace="~{EventOrganizerModule/base :: navside}"></div>
+
+    <div class="page-wrapper">
+        <div class="content" th:each="eventDetail : ${eventBookingDetails}">
+            <div class="page-header">
+                <div class="page-title">
+                    <h4>Event List</h4>
+                    <h6 th:text="${eventDetail.event.eventName}"></h6>
+                </div>
+            </div>
+            <div th:if="${eventDetail.bookings != null && !eventDetail.bookings.isEmpty()}">
+                <ul>
+                    <li th:each="booking : ${eventDetail.bookings}">
+                        <p><strong>User:</strong> <span th:text="${booking.user.name}"></span></p>
+                        <p><strong>Ticket Quantity:</strong> <span th:text="${booking.ticketQuantity}"></span></p>
+                        <p><strong>Total Price:</strong> $<span th:text="${booking.totalPrice}"></span></p>
+                        <p><strong>Status:</strong> <span th:text="${booking.status}"></span></p>
+                    </li>
+                </ul>
+            </div>
+            <!--            <div class="card">-->
+            <!--                <div class="card-body">-->
+            <!--                    <div class="table-top">-->
+            <!--                        <div class="search-set">-->
+            <!--                            <div class="search-input">-->
+            <!--                                <a class="btn btn-searchset">-->
+            <!--                                    <img th:src="@{/assets/admin/img/icons/search-white.svg}" alt="img">-->
+            <!--                                </a>-->
+            <!--                            </div>-->
+            <!--                        </div>-->
+            <!--                        <div class="wordset">-->
+            <!--                            <ul>-->
+            <!--                                <li>-->
+            <!--                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img-->
+            <!--                                            th:src="@{/assets/admin/img/icons/pdf.svg}" alt="img"></a>-->
+            <!--                                </li>-->
+            <!--                                <li>-->
+            <!--                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img-->
+            <!--                                            th:src="@{/assets/admin/img/icons/excel.svg}" alt="img"></a>-->
+            <!--                                </li>-->
+            <!--                                <li>-->
+            <!--                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img-->
+            <!--                                            th:src="@{/assets/admin/img/icons/printer.svg}" alt="img"></a>-->
+            <!--                                </li>-->
+            <!--                            </ul>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+
+            <!--                    <div class="table-responsive">-->
+            <!--                        <table class="table datanew">-->
+            <!--                            <thead>-->
+            <!--                            <tr>-->
+            <!--                                <th>Event Name</th>-->
+            <!--                                <th>Description</th>-->
+            <!--                                <th>Address</th>-->
+            <!--                                <th>Price</th>-->
+            <!--                                <th>Tickets</th>-->
+            <!--                                <th>Date</th>-->
+            <!--                                <th>Start Time</th>-->
+            <!--                                <th>End Time</th>-->
+            <!--                                <th>Image</th>-->
+            <!--                                <th>Actions</th>-->
+            <!--                            </tr>-->
+            <!--                            </thead>-->
+            <!--                            <tbody>-->
+            <!--                            <tr th:each="event : ${events}">-->
+            <!--                                <td th:text="${event.eventName}"></td>-->
+            <!--                                <td th:text="${event.eventDescription}"></td>-->
+            <!--                                <td th:text="${event.eventAddress}"></td>-->
+            <!--                                <td th:text="${event.eventPrice}"></td>-->
+            <!--                                <td th:text="${event.totalTicket}"></td>-->
+            <!--                                <td th:text="${event.eventDate}"></td>-->
+            <!--                                <td th:text="${event.startTime}"></td>-->
+            <!--                                <td th:text="${event.endTime}"></td>-->
+            <!--                                <td>-->
+            <!--                                    <img th:if="${event.eventImage}" th:src="@{'/uploads/' + ${event.eventImage}}"-->
+            <!--                                         alt="Event Image" width="100"><br>-->
+            <!--                                </td>-->
+            <!--                                <td>-->
+            <!--                                    <a class="me-3" th:href="@{/eventorg/event/delete/{id}(id=${event.id})}">-->
+            <!--                                        <img th:src="@{/assets/admin/img/icons/eye.svg}" alt="img">-->
+            <!--                                    </a>-->
+            <!--                                    <a class="me-3" th:href="@{/eventorg/event/edit/{id}(id=${event.id})}">-->
+            <!--                                        <img th:src="@{/assets/admin/img/icons/edit.svg}" alt="img">-->
+            <!--                                    </a>-->
+            <!--                                    <a class="me-3" th:href="@{/eventorg/event/delete/{id}(id=${event.id})}"-->
+            <!--                                       onclick="return confirm('Are you sure?');">-->
+            <!--                                        <img th:src="@{/assets/admin/img/icons/delete.svg}" alt="img">-->
+            <!--                                    </a>-->
+            <!--                                </td>-->
+            <!--                            </tr>-->
+            <!--                            </tbody>-->
+            <!--                        </table>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
+        </div>
+    </div>
+</div>
+<footer th:replace="~{EventOrganizerModule/base :: libs}"></footer>
+</body>
+</html>

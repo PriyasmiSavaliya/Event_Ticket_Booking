@@ -1,0 +1,111 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title>Login</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h2>Login</h2>-->
+<!--<form th:action="@{/login}" method="post">-->
+<!--    <label>Email:</label>-->
+<!--    <input type="email" name="username" required><br>-->
+<!--    <label>Password:</label>-->
+<!--    <input type="password" name="password" required><br>-->
+<!--    <button type="submit">Login</button>-->
+<!--</form>-->
+<!--<p>Don't have an account? <a th:href="@{/register}">Register here</a></p>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ETB - Login</title>
+
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/assets/admin/img/favicon.png}">
+
+    <link rel="stylesheet" th:href="@{/assets/admin/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/admin/plugins/fontawesome/css/fontawesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/admin/plugins/fontawesome/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/admin/css/style.css}">
+</head>
+<body class="account-page">
+
+<div class="main-wrapper">
+    <div class="account-content">
+        <div class="login-wrapper">
+
+            <div class="login-content">
+                <form th:action="@{/login}" method="post">
+                    <div class="login-userset">
+                        <div class="login-logo">
+                            <img th:src="@{/assets/admin/img/logo.png}" alt="img">
+                        </div>
+                        <div class="login-userheading">
+                            <h3>Sign In</h3>
+                            <h4>Please login to your account</h4>
+                        </div>
+                        <div class="form-login">
+                            <label>Email</label>
+                            <div class="form-addons">
+                                <input type="text" name="username" required placeholder="Enter your email address">
+                                <img th:src="@{/assets/admin/img/icons/mail.svg}" alt="img">
+                            </div>
+                        </div>
+                        <div class="form-login">
+                            <label>Password</label>
+                            <div class="pass-group">
+                                <input type="password" name="password" required class="pass-input"
+                                       placeholder="Enter your password">
+                                <span class="fas toggle-password fa-eye-slash"></span>
+                            </div>
+                        </div>
+                        <div class="form-login">
+                            <div class="alreadyuser">
+                                <h4><a href="" class="hover-a">Forgot Password?</a></h4>
+                            </div>
+                        </div>
+                        <input type="checkbox" value="remember-me" name="remember-me" class="text-primary"> Remember me
+                        <div class="form-login">
+                            <input type="submit" class="btn btn-login" th:href="@{/login}" value="Sign in">
+                        </div>
+                        <div class="signinform text-center">
+                            <h4>Don’t have an account? <a th:href="@{/register}" class="hover-a">Sign Up</a></h4>
+                        </div>
+                        <div class="form-setlogin">
+                            <h4>Or sign up with</h4>
+                        </div>
+                        <div class="form-sociallink">
+                            <ul>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <img th:src="@{/assets/admin/img/icons/google.png}" class="me-2" alt="google">
+                                        Sign Up using Google
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <img th:src="@{/assets/admin/img/icons/facebook.png}" class="me-2" alt="google">
+                                        Sign Up using Facebook
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="login-img">
+                <img th:src="@{/assets/admin/img/login.jpg}" alt="img">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/assets/admin/js/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/assets/admin/js/feather.min.js}"></script>
+<script th:src="@{/assets/admin/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/assets/admin/js/script.js}"></script>
+
+</body>
+</html>

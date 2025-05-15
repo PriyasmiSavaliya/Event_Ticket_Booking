@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Event Bookings</title>
+</head>
+<body>
+
+<h1>Event Bookings for Organization ID: <span th:text="${organizationId}"></span></h1>
+
+<!-- Check if there are any events with bookings -->
+<div th:if="${eventBookingDetails != null && !eventBookingDetails.isEmpty()}">
+    <h2>List of Events and Their Bookings</h2>
+
+    <!-- Loop through each event and its bookings -->
+    <div th:each="eventDetail : ${eventBookingDetails}">
+        <h3 th:text="${eventDetail.event.eventName}">Event Name</h3>
+
+        <!-- Check if there are bookings for this event -->
+        <div th:if="${eventDetail.bookings != null && !eventDetail.bookings.isEmpty()}">
+            <ul>
+                <li th:each="booking : ${eventDetail.bookings}">
+                    <p><strong>User:</strong> <span th:text="${booking.user.name}"></span></p>
+                    <p><strong>Ticket Quantity:</strong> <span th:text="${booking.ticketQuantity}"></span></p>
+                    <p><strong>Total Price:</strong> $<span th:text="${booking.totalPrice}"></span></p>
+                    <p><strong>Status:</strong> <span th:text="${booking.status}"></span></p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- If no bookings are available for this event -->
+        <div th:if="${eventDetail.bookings == null || eventDetail.bookings.isEmpty()}">
+            <p>No bookings have been made for this event yet.</p>
+        </div>
+
+        <hr />
+    </div>
+</div>
+
+<!-- If no events are found -->
+<div th:if="${eventBookingDetails == null || eventBookingDetails.isEmpty()}">
+    <p>No events found for this organization.</p>
+</div>
+
+</body>
+</html>

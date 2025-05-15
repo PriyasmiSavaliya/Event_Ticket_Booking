@@ -1,0 +1,196 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title>Edit Event</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Edit Event</h1>-->
+<!--<form th:action="@{/eventorg/event/edit}" th:object="${events}" method="post" enctype="multipart/form-data">-->
+<!--    <input type="hidden" th:field="*{id}">-->
+<!--    <input type="hidden" name="eventOrganizerId" th:value="${eventOrganizerId}">-->
+
+<!--    <label>Event Name:</label>-->
+<!--    <input type="text" th:field="*{eventName}" required><br>-->
+
+<!--    <label>Event Image:</label>-->
+<!--    <input type="file" name="image" accept="image/*"><br>-->
+<!--    <img th:if="${events.eventImage}" th:src="@{'/uploads/' + ${events.eventImage}}" alt="Event Image" width="100"><br>-->
+
+<!--    <label>Event Description:</label>-->
+<!--    <textarea th:field="*{eventDescription}" required></textarea><br>-->
+
+<!--    <label>Event Address:</label>-->
+<!--    <input type="text" th:field="*{eventAddress}" required><br>-->
+
+<!--    <label>event Price (par Tickets):</label>-->
+<!--    <input type="number" th:field="*{eventPrice}" required><br>-->
+
+<!--    <label>Total Tickets:</label>-->
+<!--    <input type="number" th:field="*{totalTicket}" required><br>-->
+
+<!--    <label>Event Date:</label>-->
+<!--    <input type="date" name="eventDate" th:value="${formattedDateForInput}" required><br>-->
+
+<!--    <label>Start Time:</label>-->
+<!--    <input type="time" name="startTime" th:value="${formattedStartTime}" required><br>-->
+
+<!--    <label>End Time:</label>-->
+<!--    <input type="time" name="endTime" th:value="${formattedEndTime}" required><br>-->
+
+<!--    <button type="submit">Update Event</button>-->
+<!--</form>-->
+<!--<p><a th:href="@{/eventorg/event/list}">Back to Event List</a></p>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<header th:replace="~{EventOrganizerModule/base :: header}"></header>
+<body>
+
+<div th:replace="~{EventOrganizerModule/base :: loader}"></div>
+
+<div class="main-wrapper">
+
+    <div th:replace="~{EventOrganizerModule/base :: navside}"></div>
+
+    <div class="page-wrapper cardhead">
+        <div class="content container-fluid">
+
+            <div class="page-header">
+                <div class="row">
+                    <div class="col">
+                        <h3 class="page-title">Update Event</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <form th:action="@{/eventorg/event/edit}" th:object="${events}" method="post"
+                                  enctype="multipart/form-data">
+                                <input type="hidden" th:field="*{id}">
+                                <input type="hidden" name="eventOrganizerId" th:value="${eventOrganizerId}">
+                                <div class="row">
+                                    <div class="col-xl-6">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label">Event Name</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" th:field="*{eventName}" required
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label">Event Date</label>
+                                            <div class="col-lg-9">
+                                                <input type="date" name="eventDate" th:value="${formattedDateForInput}"
+                                                       required
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label">Start Time</label>
+                                            <div class="col-lg-9">
+                                                <input type="time" th:field="*{startTime}" required
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label">End Time</label>
+                                            <div class="col-lg-9">
+                                                <input type="time" th:field="*{endTime}" required class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label">Event Description</label>
+                                            <div class="col-lg-9">
+                                                <textarea rows="1" cols="5" th:field="*{eventDescription}" required
+                                                          class="form-control"
+                                                          placeholder="Enter Description"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label">Event Address</label>
+                                            <div class="col-lg-9">
+                                                <textarea rows="1" cols="5" th:field="*{eventAddress}" required
+                                                          class="form-control"
+                                                          placeholder="Enter Address"></textarea>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-xl-6">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label">Ticket Price</label>
+                                            <div class="col-lg-9">
+                                                <input type="number" th:field="*{eventPrice}" required
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label">Total Tickets</label>
+                                            <div class="col-lg-9">
+                                                <input type="number" th:field="*{totalTicket}" required
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="card-body">
+                                            <div class="custom-file-container" data-upload-id="myFirstImage">
+                                                <label>Upload Event Image
+                                                    <a href="javascript:void(0)"
+                                                       class="custom-file-container__image-clear" title="Clear Image"
+                                                       onclick="clearImage()">x</a>
+                                                </label>
+                                                <label class="custom-file-container__custom-file">
+                                                    <input type="file" name="image" required
+                                                           class="custom-file-container__custom-file__custom-file-input"
+                                                           accept="image/*" onchange="previewImage(event)">
+                                                    <input type="hidden" name="MAX_FILE_SIZE" value="10485760"/>
+                                                    <span class="custom-file-container__custom-file__custom-file-control"></span>
+                                                </label>
+                                                <img id="imagePreview" class="custom-file-container__image-preview"
+                                                     th:if="${events.eventImage}"
+                                                     th:src="@{'/uploads/' + ${events.eventImage}}" alt="Event Image"
+                                                     width="100">
+                                            </div>
+                                        </div>
+
+                                        <script>
+                                            function previewImage(event) {
+                                                var reader = new FileReader();
+                                                reader.onload = function () {
+                                                    var output = document.getElementById('imagePreview');
+                                                    output.src = reader.result;
+                                                    output.style.display = 'block';  // Ensure the image is visible
+                                                };
+                                                reader.readAsDataURL(event.target.files[0]);
+                                            }
+
+                                            function clearImage() {
+                                                document.getElementById('imagePreview').src = '';
+                                            }
+                                        </script>
+
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary">Update Event</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<footer th:replace="~{EventOrganizerModule/base :: libs}"></footer>
+</body>
+</html>

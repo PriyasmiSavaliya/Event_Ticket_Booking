@@ -1,0 +1,148 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title>Register</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h2>Register</h2>-->
+<!--<form th:action="@{/register}" th:object="${user}" method="post">-->
+<!--    <label>Name:</label>-->
+<!--    <input type="text" th:field="*{name}" name="name" required><br>-->
+
+<!--    <label>Email:</label>-->
+<!--    <input type="email" th:field="*{email}" name="email" required><br>-->
+
+<!--    <label>Password:</label>-->
+<!--    <input type="password" th:field="*{password}" name="password" required><br>-->
+
+<!--    <label>Mobile:</label>-->
+<!--    <input type="text" th:field="*{mobile}" name="mobile" required><br>-->
+
+<!--    <label>Role:</label>-->
+<!--    <select name="roleName">-->
+<!--        <option th:each="role : ${roles}" th:value="${role.name}" th:text="${role.name}"></option>-->
+<!--    </select><br>-->
+
+<!--    <button type="submit">Register</button>-->
+<!--</form>-->
+
+<!--<p>Already have an account? <a th:href="@{/login}">Login here</a></p>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ETB - Registration</title>
+
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/assets/admin/img/favicon.png}">
+
+    <link rel="stylesheet" th:href="@{/assets/admin/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/admin/plugins/fontawesome/css/fontawesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/admin/plugins/fontawesome/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/admin/css/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/admin/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/assets/admin/plugins/select2/css/select2.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/admin/css/dataTables.bootstrap4.min.css}">
+    </head>
+<body class="account-page">
+<div class="main-wrapper">
+    <div class="account-content">
+        <div class="login-wrapper">
+            <div class="login-content">
+                <form th:action="@{/register}" th:object="${user}" method="post">
+                    <div class="login-userset">
+                        <div class="login-logo">
+                            <img th:src="@{/assets/admin/img/logo.png}" alt="img">
+                        </div>
+                        <div class="login-userheading">
+                            <h3>Create an Account</h3>
+<!--                            <h4>Continue where you left off</h4>-->
+                        </div>
+                        <div class="form-login">
+                            <label>Full Name</label>
+                            <div class="form-addons">
+                                <input type="text" th:field="*{name}" name="name" required
+                                       placeholder="Enter your full name">
+                                <img th:src="@{/assets/admin/img/icons/users1.svg}" alt="img">
+                            </div>
+                        </div>
+                        <div class="form-login">
+                            <label>Email</label>
+                            <div class="form-addons">
+                                <input type="text" th:field="*{email}" name="email" required
+                                       placeholder="Enter your email address">
+                                <img th:src="@{/assets/admin/img/icons/mail.svg}" alt="img">
+                            </div>
+                        </div>
+                        <div class="form-login">
+                            <label>Password</label>
+                            <div class="pass-group">
+                                <input type="password" th:field="*{password}" name="password" required
+                                       class="pass-input" placeholder="Enter your password">
+                                <span class="fas toggle-password fa-eye-slash"></span>
+                            </div>
+                        </div>
+                        <div class="form-login">
+                            <label>Mobile Number</label>
+                            <div class="form-addons">
+                                <input type="text" th:field="*{mobile}" name="mobile" required
+                                       class="pass-input" placeholder="Enter your mobile no">
+                                <img th:src="@{/assets/admin/img/icons/transcation.svg}" alt="img">
+                            </div>
+                        </div>
+                        <div>
+                            <label>User Role</label>
+                            <div class="form-group">
+                                <select name="roleName" class="select">
+                                    <option th:each="role : ${roles}" th:value="${role.name}"
+                                            th:text="${role.name}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-login">
+                            <input type="submit" class="btn btn-login" th:href="@{/register}" value="Sign up">
+                        </div>
+                        <div class="signinform text-center">
+                            <h4>Already a user? <a th:href="@{/login}" class="hover-a">Sign In</a></h4>
+                        </div>
+                        <div class="form-setlogin">
+                            <h4>Or sign up with</h4>
+                        </div>
+                        <div class="form-sociallink">
+                            <ul>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <img th:src="@{/assets/admin/img/icons/google.png}" class="me-2" alt="google">
+                                        Sign Up using Google
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <img th:src="@{/assets/admin/img/icons/facebook.png}" class="me-2" alt="google">
+                                        Sign Up using Facebook
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="login-img">
+                <img th:src="@{/assets/admin/img/login.jpg}" alt="img">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/assets/admin/js/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/assets/admin/js/feather.min.js}"></script>
+<script th:src="@{/assets/admin/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/assets/admin/js/script.js}"></script>
+<script th:src="@{/assets/admin/js/jquery.slimscroll.min.js}"></script>
+<script th:src="@{/assets/admin/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/assets/admin/js/dataTables.bootstrap4.min.js}"></script>
+<script th:src="@{/assets/admin/plugins/select2/js/select2.min.js}"></script>
+</body>
+</html>
